@@ -1,0 +1,87 @@
+@baseUrl = http://localhost:8080
+
+# USERS
+
+### Create user Alice (id = 1)
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+
+{
+  "email": "alice@example.com",
+  "name": "Alice"
+}
+
+### Create user Bob (id = 2)
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+
+{
+  "email": "bob@example.com",
+  "name": "Bob"
+}
+
+###
+# SLOTS
+###
+
+### Create a slot for Alice (id = 1)
+POST {{baseUrl}}/api/slots
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "startTime": "2026-04-10T09:00:00",
+  "endTime": "2026-04-10T10:00:00"
+}
+
+### Update slot (reschedule or change status)
+### Status values: AVAILABLE, BOOKED, CANCELLED
+PUT {{baseUrl}}/api/slots/1
+Content-Type: application/json
+
+{
+  "startTime": "2026-04-10T10:00:00",
+  "endTime": "2026-04-10T11:00:00",
+  "status": "AVAILABLE"
+}
+
+### Get all slots for a user
+GET {{baseUrl}}/api/slots/user/1
+
+### Get slots filtered by status
+GET {{baseUrl}}/api/slots/user/1?status=AVAILABLE
+
+### Get slots filtered by time range
+GET {{baseUrl}}/api/slots/user/1?from=2026-04-10T00:00:00&to=2026-04-10T23:59:59
+
+### Delete a slot
+DELETE {{baseUrl}}/api/slots/1
+
+
+# MEETINGS
+
+### Schedule a meeting on slot 1 with Bob as participant
+### (create a new slot first if you deleted it above)
+POST {{baseUrl}}/api/meetings
+Content-Type: application/json
+
+{
+  "slotId": 1,
+  "title": "Sample Title",
+  "description": "Sample Description",
+  "participantUserIds": [
+    2
+  ]
+}
+
+### Get meeting by ID
+GET {{baseUrl}}/api/meetings/1
+
+### Update a participant's status
+PATCH {{baseUrl}}/api/meetings/1/participants
+Content-Type: application/json
+
+{
+  "userId": 2,
+  "status": "ACCEPTED"
+}
