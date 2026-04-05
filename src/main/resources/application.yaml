@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: task
+  datasource:
+    url: jdbc:postgresql://localhost:5432/meeting_scheduler
+    username: scheduler
+    password: scheduler
+  sql:
+    init:
+      mode: always
