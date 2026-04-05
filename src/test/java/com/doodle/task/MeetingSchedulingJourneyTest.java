@@ -42,8 +42,8 @@ class MeetingSchedulingJourneyTest {
 
         long meetingId = idOf(post("/api/meetings", Map.of(
                 "slotId", idOf(slot),
-                "title", "Sync up",
-                "description", "Quick catch-up",
+                "title", "sample title",
+                "description", "sample description",
                 "participantUserIds", List.of(bobId))));
 
         var busySlots = restTestClient.get()
