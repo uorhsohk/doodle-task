@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:18.3-alpine
+    container_name: meeting-scheduler-db
+    environment:
+      POSTGRES_DB: meeting_scheduler
+      POSTGRES_USER: scheduler
+      POSTGRES_PASSWORD: scheduler
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+volumes:
+  pg_data:
