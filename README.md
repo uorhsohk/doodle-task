@@ -60,3 +60,31 @@ Ctrl+C
 # Bring down the database
 docker-compose down
 ```
+
+## Future Improvements
+
+### 1. Authentication & Authorization
+Introduce OAuth2 via Keycloak as the identity provider. Spring Security's OAuth2 resource server support makes this straightforward to wire in. This would protect all endpoints.
+
+### 2. Metrics & Observability
+Expose application metrics via Spring Boot Actuator + Micrometer, scraped by Prometheus and visualised in Grafana.
+
+### 3. Structured Logging
+Adopt SLF4J + Logback so that log output is machine-readable.
+
+### 4. Testing Pyramid
+- Unit tests services and mappers in isolation with mocked ports.
+- Integration tests.
+- E2E once a frontend exists, for example by using Playwright/Cypress for browser-level end-to-end tests.
+
+### 5. CI/CD Pipeline
+Setting up a GitHub Actions/Gitlab CI pipeline for automated building, testing, linting and pushing to staging and production environment.
+
+### 6. Staging & Production Environments
+Maintain two environments so new features can be validated before reaching end users.
+
+### 7. User Behaviour Tracking
+Integrate a product analytics tool to track how users interact with the scheduler.
+
+### 8. Distributed Tracing
+Adding tracing so that one can follow a single request across service boundaries and/or identify slow DB queries.
